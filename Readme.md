@@ -6,3 +6,7 @@ reinterpret_cast
 
 static cast
 : related type conversion
+
+catch (...){} : catch everything.
+
+reference casting must use 'try/catch'
