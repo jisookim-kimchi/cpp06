@@ -6,7 +6,7 @@
 /*   By: jisokim2 <jisokim2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 12:47:27 by jisokim2          #+#    #+#             */
-/*   Updated: 2026/04/17 14:32:09 by jisokim2         ###   ########.fr       */
+/*   Updated: 2026/04/17 16:30:35 by jisokim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main()
     std::cout << std::endl;
     ScalarConverter::convert("42.0f");
     ScalarConverter::convert("-4.2f");
-    ScalarConverter::convert("340282346638528859811704183484516925440.0f"); // float max-ish
+    ScalarConverter::convert("340282346638528859811704183484516925440.0f"); // float max
     ScalarConverter::convert("inff");
     ScalarConverter::convert("+inff");
     ScalarConverter::convert("-inff");
@@ -41,7 +41,7 @@ int main()
     ScalarConverter::convert("42.42");
     ScalarConverter::convert("0.0");
     ScalarConverter::convert("-4.2");
-    ScalarConverter::convert("1.79769e+308");
+    ScalarConverter::convert("1.79769e+308"); //double max
     ScalarConverter::convert("inf");
     ScalarConverter::convert("+inf");
     ScalarConverter::convert("-inf");

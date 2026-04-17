@@ -6,7 +6,7 @@
 /*   By: jisokim2 <jisokim2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 12:47:33 by jisokim2          #+#    #+#             */
-/*   Updated: 2026/04/17 14:37:14 by jisokim2         ###   ########.fr       */
+/*   Updated: 2026/04/17 16:51:28 by jisokim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ namespace
 {
     bool isChar(const std::string& str)
     {
-        if (str.length() == 1 && !std::isdigit(str[0]) && std::isprint(str[0]))
+        if (str.length() == 1 && !std::isdigit(static_cast<unsigned char>(str[0])))
             return true;
         return false;
     }
@@ -31,11 +31,11 @@ namespace
             return false;
         if (str[0] == '-' || str[0] == '+')
         {
-            if (str[1] == '\0')
+            if (str.length() == 1)
                 return false;
             for (size_t i = 1; i < str.length(); i++)
             {
-                if (!std::isdigit(str[i]))
+                if (!std::isdigit((static_cast<unsigned char>(str[i]))))
                     return false;
             }
         }
@@ -43,19 +43,26 @@ namespace
         {
             for (size_t i = 0; i < str.length(); i++)
             {
-                if (!std::isdigit(str[i]))
+                if (!std::isdigit((static_cast<unsigned char>(str[i]))))
                     return false;
             }
         }
-        long long val = std::atol(str.c_str());
-        if (val > std::numeric_limits<int>::max() || val < std::numeric_limits<int>::min())
+        try
+        {
+            long long val = std::stol(str.c_str());
+            if (val > std::numeric_limits<int>::max() || val < std::numeric_limits<int>::min())
+                return false;
+        }
+        catch(...)
+        {
             return false;
+        }
         return true;
     }
 
     bool isFloat(const std::string& str)
     {
-        if (str == "-inff" || str == "+inff" || str == "nanf")
+        if (str == "-inff" || str == "+inff" || str == "inff" || str == "nanf")
             return true;
         if (str.empty() || str[str.length() - 1] != 'f')
             return false;
@@ -73,19 +80,21 @@ namespace
                 if (dot_count > 1)
                     return false;
             }
-            else if (!std::isdigit(str[i]))
+            else if (!std::isdigit((static_cast<unsigned char>(str[i]))))
                 return false;
             else
                 digit_count++;
         }
         if (digit_count == 0)
             return false;
+        if (dot_count == 0)
+            return false;
         return true;
     }
 
     bool isDouble(const std::string &str)
     {
-        if (str == "-inf" || str == "+inf" || str == "nan")
+        if (str == "-inf" || str == "+inf" || str == "inf" ||  str == "nan")
             return true;
         if (str.empty())
             return false;
@@ -103,7 +112,7 @@ namespace
                 if (dot_count > 1)
                     return false;
             }
-            else if (!std::isdigit(str[i]))
+            else if (!std::isdigit((static_cast<unsigned char>(str[i]))))
                 return false;
             else
                 digit_count++;
@@ -117,7 +126,7 @@ namespace
 
     void printChar(char c, int i, const std::string& str)
     {
-        if (str == "nan" || str == "nanf" || str == "+inf" || str == "+inff" || str == "-inf" || str == "-inff" || i < 0 || i > 255)
+        if (str == "nan" || str == "nanf" || str == "+inf" || str == "inf" || str == "+inff" || str == "-inf" || str == "-inff" || str == "inff" || (i < 0) || (i > 255))
             std::cout << "char: impossible" << std::endl;
         else if (!std::isprint(c)) 
             std::cout << "char: Non displayable" << std::endl;
@@ -127,7 +136,7 @@ namespace
 
     void printInt(int i, const std::string& str)
     {
-        if (str == "nan" || str == "nanf" || str == "+inf" || str == "+inff" || str == "-inf" || str == "-inff")
+        if (str == "nan" || str == "nanf" || str == "+inf" || str == "inf" || str == "+inff" || str == "-inf" || str == "-inff")
             std::cout << "int: impossible" << std::endl;
         else
             std::cout << "int: " << i << std::endl;
@@ -135,20 +144,12 @@ namespace
 
     void printFloat(float f)
     {
-        std::cout << "float: " << std::fixed << std::setprecision(1);
-        if (f == static_cast<int>(f))
-            std::cout << "float: " << f << ".0f" << std::endl;
-        else
-            std::cout << "float: " << f << "f" << std::endl;
+        std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
     }
 
     void printDouble(double d)
     {
-        std::cout << "double: " << std::fixed << std::setprecision(1);
-        if (d == static_cast<int>(d))
-            std::cout << "double: " << d << ".0" << std::endl;
-        else
-            std::cout << "double: " << d << std::endl;
+        std::cout << "double: " << std::fixed << std::setprecision(1) << d << std::endl;
     }
 }
 
@@ -210,4 +211,5 @@ void ScalarConverter::convert(const std::string& str)
     printInt(i, str);
     printFloat(f);
     printDouble(d);
+    std::cout << std::endl;
 }
