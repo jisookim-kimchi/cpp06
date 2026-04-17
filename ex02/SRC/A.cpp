@@ -1,38 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serializer.hpp                                     :+:      :+:    :+:   */
+/*   A.cpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jisokim2 <jisokim2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/17 12:47:50 by jisokim2          #+#    #+#             */
-/*   Updated: 2026/04/17 12:47:51 by jisokim2         ###   ########.fr       */
+/*   Created: 2026/04/17 12:47:56 by jisokim2          #+#    #+#             */
+/*   Updated: 2026/04/17 13:47:30 by jisokim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERIALIZER_HPP
-# define SERIALIZER_HPP
-
+#include "../HEADER/A.hpp"
 #include <iostream>
-#include <string>
-#include <stdint.h>
 
-struct Data
+A::~A()
 {
-    std::string     name;
-    uint32_t        price;
-};
-
-class Serializer
-{
-public:
-    static uintptr_t serialize(Data* ptr);
-    static Data* deserialize(uintptr_t raw);
-private:
-    Serializer();
-    ~Serializer();
-    Serializer(const Serializer& other);
-    Serializer& operator=(const Serializer& other);
-};
-
-#endif
+    std::cout << "A destructed" << std::endl;
+}

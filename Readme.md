@@ -1,5 +1,8 @@
-namespace : to avoid conflict with other function name or variable name
+std::fixed forces normal decimal notation
 
+std::setprecision(1) how many digist are shown.
+
+namespace : to avoid conflict with other function name or variable name
 
 reinterpret_cast
 : non-related type conversion

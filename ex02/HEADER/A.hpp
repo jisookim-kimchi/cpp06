@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serializer.hpp                                     :+:      :+:    :+:   */
+/*   A.hpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jisokim2 <jisokim2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/17 12:47:50 by jisokim2          #+#    #+#             */
-/*   Updated: 2026/04/17 12:47:51 by jisokim2         ###   ########.fr       */
+/*   Created: 2026/04/17 12:48:01 by jisokim2          #+#    #+#             */
+/*   Updated: 2026/04/17 13:54:15 by jisokim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERIALIZER_HPP
-# define SERIALIZER_HPP
+#ifndef A_HPP
+#define A_HPP
 
-#include <iostream>
-#include <string>
-#include <stdint.h>
+#include "Base.hpp"
 
-struct Data
+class A : public Base
 {
-    std::string     name;
-    uint32_t        price;
-};
 
-class Serializer
-{
 public:
-    static uintptr_t serialize(Data* ptr);
-    static Data* deserialize(uintptr_t raw);
-private:
-    Serializer();
-    ~Serializer();
-    Serializer(const Serializer& other);
-    Serializer& operator=(const Serializer& other);
+    ~A() override;
 };
 
 #endif

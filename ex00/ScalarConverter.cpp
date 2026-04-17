@@ -1,6 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ScalarConverter.cpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jisokim2 <jisokim2@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/17 12:47:33 by jisokim2          #+#    #+#             */
+/*   Updated: 2026/04/17 14:37:14 by jisokim2         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ScalarConverter.hpp"
 #include <cctype>
 #include <limits>
+#include <cmath>
+#include <iomanip>
 
 namespace
 {
@@ -121,6 +135,7 @@ namespace
 
     void printFloat(float f)
     {
+        std::cout << "float: " << std::fixed << std::setprecision(1);
         if (f == static_cast<int>(f))
             std::cout << "float: " << f << ".0f" << std::endl;
         else
@@ -129,6 +144,7 @@ namespace
 
     void printDouble(double d)
     {
+        std::cout << "double: " << std::fixed << std::setprecision(1);
         if (d == static_cast<int>(d))
             std::cout << "double: " << d << ".0" << std::endl;
         else
