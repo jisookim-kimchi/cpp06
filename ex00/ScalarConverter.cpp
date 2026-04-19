@@ -66,85 +66,46 @@ namespace
             return true;
         if (str.empty() || str[str.length() - 1] != 'f')
             return false;
-        size_t length = str.length() - 1;
-        short dot_count = 0;
-        short digit_count = 0;
-        
-        for (size_t i = 0; i < length; i++)
-        {
-            if (i == 0 && (str[i] == '-' || str[i] == '+'))
-                continue;
-            if (str[i] == '.')
-            {
-                dot_count++;
-                if (dot_count > 1)
-                    return false;
-            }
-            else if (!std::isdigit((static_cast<unsigned char>(str[i]))))
-                return false;
-            else
-                digit_count++;
-        }
-        if (digit_count == 0)
-            return false;
-        if (dot_count == 0)
-            return false;
-        return true;
+        std::string temp = str.substr(0, str.length() - 1);
+        char* endptr = NULL;
+        std::strtod(temp.c_str(), &endptr);
+        return (*endptr == '\0');
     }
 
     bool isDouble(const std::string &str)
     {
-        if (str == "-inf" || str == "+inf" || str == "inf" ||  str == "nan")
+        if (str == "-inf" || str == "+inf" || str == "inf" || str == "nan")
             return true;
-        if (str.empty())
-            return false;
-        size_t length = str.length();
-        short dot_count = 0;
-        short digit_count = 0;
-        
-        for (size_t i = 0; i < length; i++)
-        {
-            if (i == 0 && (str[i] == '-' || str[i] == '+'))
-                continue;
-            if (str[i] == '.')
-            {
-                dot_count++;
-                if (dot_count > 1)
-                    return false;
-            }
-            else if (!std::isdigit((static_cast<unsigned char>(str[i]))))
-                return false;
-            else
-                digit_count++;
-        }
-        if (digit_count == 0)
-            return false;
-        if (dot_count == 0)
-            return false;
-        return true;
+        char* endptr = NULL;
+        std::strtod(str.c_str(), &endptr);
+        if (*endptr == '\0' && (str.find('.') != std::string::npos || str.find('e') != std::string::npos))
+            return true;
+        return false;
     }
 
-    void printChar(char c, int i, const std::string& str)
+    void printChar(double d)
     {
-        if (str == "nan" || str == "nanf" || str == "+inf" || str == "inf" || str == "+inff" || str == "-inf" || str == "-inff" || str == "inff" || (i < 0) || (i > 255))
-            std::cout << "char: impossible" << std::endl;
-        else if (!std::isprint(c)) 
-            std::cout << "char: Non displayable" << std::endl;
+        std::cout << "char: ";
+        if (std::isnan(d) || std::isinf(d) || d < 0 || d > 127)
+            std::cout << "impossible" << std::endl;
+        else if (!std::isprint(static_cast<int>(d))) 
+            std::cout << "Non displayable" << std::endl;
         else 
-            std::cout << "char: '" << c << "'" << std::endl;
+            std::cout << "'" << static_cast<char>(d) << "'" << std::endl;
     }
 
-    void printInt(int i, const std::string& str)
+    void printInt(double d)
     {
-        if (str == "nan" || str == "nanf" || str == "+inf" || str == "inf" || str == "+inff" || str == "-inf" || str == "-inff")
-            std::cout << "int: impossible" << std::endl;
+        std::cout << "int: ";
+        if (std::isnan(d) || std::isinf(d) || d > std::numeric_limits<int>::max() || d < std::numeric_limits<int>::min())
+            std::cout << "impossible" << std::endl;
         else
-            std::cout << "int: " << i << std::endl;
+            std::cout << static_cast<int>(d) << std::endl;
     }
 
-    void printFloat(float f)
+    void printFloat(double d)
     {
-        std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+        std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(d) << "f" << std::endl;
     }
 
     void printDouble(double d)
@@ -168,48 +129,25 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other)
 
 void ScalarConverter::convert(const std::string& str)
 {
-    char c = 0;
-    int i = 0;
-    float f = 0;
-    double d = 0;
+    double d;
     
     if (isChar(str))
     {
-        c = str[0];
-        i = static_cast<int>(c);
-        f = static_cast<float>(c);
-        d = static_cast<double>(c);
+        d = static_cast<double>(str[0]);
     }
-    else if (isInt(str))
-    {
-        i = std::atoi(str.c_str());
-        c = static_cast<char>(i);
-        f = static_cast<float>(i);
-        d = static_cast<double>(i);
-    }
-    else if (isFloat(str))
-    {
-        f = static_cast<float>(std::atof(str.c_str()));
-        i = static_cast<int>(f);
-        c = static_cast<char>(f);
-        d = static_cast<double>(f);
-    }
-    else if (isDouble(str))
+    else if (isInt(str) || isFloat(str) || isDouble(str))
     {
         d = std::atof(str.c_str());
-        i = static_cast<int>(d);
-        c = static_cast<char>(d);
-        f = static_cast<float>(d);
     }
     else
     {
-        std::cout << "Invalid input" << std::endl;
+        std::cout << "char: impossible\nint: impossible\nfloat: nanf\ndouble: nan" << std::endl;
         return ;
     }
 
-    printChar(c, i, str);
-    printInt(i, str);
-    printFloat(f);
+    printChar(d);
+    printInt(d);
+    printFloat(d);
     printDouble(d);
     std::cout << std::endl;
 }
