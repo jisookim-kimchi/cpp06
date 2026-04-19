@@ -141,7 +141,7 @@ void ScalarConverter::convert(const std::string& str)
     }
     else
     {
-        std::cout << "char: impossible\nint: impossible\nfloat: nanf\ndouble: nan" << std::endl;
+        std::cout << "Invalid input" << std::endl;
         return ;
     }
 
