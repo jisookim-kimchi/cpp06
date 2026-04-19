@@ -68,7 +68,7 @@ namespace
             return false;
         std::string temp = str.substr(0, str.length() - 1);
         char* endptr = NULL;
-        std::strtod(temp.c_str(), &endptr);
+        std::strtof(temp.c_str(), &endptr);
         return (*endptr == '\0');
     }
 
