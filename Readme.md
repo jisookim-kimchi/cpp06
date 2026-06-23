@@ -5,10 +5,13 @@ std::setprecision(1) how many digist are shown.
 namespace : to avoid conflict with other function name or variable name
 
 reinterpret_cast
-: non-related type conversion
+: Ignore the original type of this memory, take the raw 0s and 1s, and interpret them exactly as this completely different type.  
 
 static cast
 : related type conversion
+  1. Truncating floating-point numbers to integers (double to int).
+  2. Converting scoped enums (enum class) to integers.
+  3. Safe upcasting (moving from a Derived class pointer to a Base class pointer).
 
 catch (...){} : catch everything.
 
