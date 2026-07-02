@@ -15,17 +15,17 @@
 
 int main()
 {
-    std::cout << "char test" << std::endl;
+    std::cout << "---------------------------------char test---------------------------------" << std::endl;
     std::cout << std::endl;
     ScalarConverter::convert("a");
     ScalarConverter::convert("\n");
     
-    std::cout << "int test" << std::endl;
+    std::cout << "---------------------------------int test---------------------------------" << std::endl;
     std::cout << std::endl;
     ScalarConverter::convert(std::to_string(std::numeric_limits<int>::max()));
     ScalarConverter::convert(std::to_string(std::numeric_limits<int>::min()));
     
-    std::cout << "float test" << std::endl;
+    std::cout << "---------------------------------float test---------------------------------" << std::endl;
     std::cout << std::endl;
     ScalarConverter::convert("42.0f");
     ScalarConverter::convert("-4.2f");
@@ -35,7 +35,9 @@ int main()
     ScalarConverter::convert("-inff");
     ScalarConverter::convert("nanf");
 
-    std::cout << "double test" << std::endl;
+   
+
+    std::cout << "---------------------------------double test---------------------------------" << std::endl;
     std::cout << std::endl;
     ScalarConverter::convert("42.0");
     ScalarConverter::convert("42.42");
@@ -47,7 +49,10 @@ int main()
     ScalarConverter::convert("-inf");
     ScalarConverter::convert("nan");
 
-    std::cout << "invalid test" << std::endl;
+    // std::cout << "float: " << static_cast<float>(42.42) << std::endl;
+    // std::cout << "double inf (casted): " << static_cast<double>(1.79769e+308) << std::endl;
+
+    std::cout << "---------------------------------invalid test---------------------------------" << std::endl;
     ScalarConverter::convert("");
     ScalarConverter::convert("hello");
     ScalarConverter::convert("123abc");
