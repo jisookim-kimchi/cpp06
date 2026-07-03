@@ -6,7 +6,7 @@
 /*   By: jisokim2 <jisokim2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 12:48:17 by jisokim2          #+#    #+#             */
-/*   Updated: 2026/04/17 14:00:08 by jisokim2         ###   ########.fr       */
+/*   Updated: 2026/06/23 14:39:09 by jisokim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ int main()
         identify(object);
         std::cout << "Reference: ";
         identify(*object);
-        std::cout << "--------------------" << std::endl;
         delete object;
+        std::cout << "--------------------" << std::endl;
     }
 
     return 0;
