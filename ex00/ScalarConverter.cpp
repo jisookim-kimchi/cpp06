@@ -6,7 +6,7 @@
 /*   By: jisokim2 <jisokim2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 12:47:33 by jisokim2          #+#    #+#             */
-/*   Updated: 2026/06/23 11:30:51 by jisokim2         ###   ########.fr       */
+/*   Updated: 2026/07/03 14:44:04 by jisokim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ namespace
 
     void printFloat(double d)
     {
-        std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(d) << "f" << std::endl;
+        //if (d == numeric number then )
+            std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(d) << "f" << std::endl;
     }
 
     void printDouble(double d)

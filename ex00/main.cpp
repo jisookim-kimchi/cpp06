@@ -6,7 +6,7 @@
 /*   By: jisokim2 <jisokim2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 12:47:27 by jisokim2          #+#    #+#             */
-/*   Updated: 2026/04/17 16:30:35 by jisokim2         ###   ########.fr       */
+/*   Updated: 2026/07/03 14:42:32 by jisokim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,17 @@ int main()
     ScalarConverter::convert("-inf");
     ScalarConverter::convert("nan");
 
-    // std::cout << "float: " << static_cast<float>(42.42) << std::endl;
-    // std::cout << "double inf (casted): " << static_cast<double>(1.79769e+308) << std::endl;
+    std::cout << "float: " << static_cast<float>(42.42) << std::endl;
+    std::cout << "double 1.79769e+308 (casted): " << static_cast<double>(1.79769e+308) << std::endl;
+
+    double inf = std::numeric_limits<double>::infinity();
+    std::cout << static_cast<float>(inf) << std::endl;
+
+    std::string strtest = "123.4erewrwe";
+    char *endptr = NULL;
+    float value = std::strtof(strtest.c_str() , &endptr);
+    std:: cout << static_cast<float>(value) << std::endl;
+    
 
     std::cout << "---------------------------------invalid test---------------------------------" << std::endl;
     ScalarConverter::convert("");
